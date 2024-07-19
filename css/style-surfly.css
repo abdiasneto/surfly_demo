@@ -1,0 +1,88 @@
+body{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fcfc30;
+}
+
+img.logo-bb {
+    width: 50%;
+    position: absolute;
+    opacity: 0.7;
+}
+
+.content {
+    width: 50%;
+    background: #c8cadc;
+}
+
+img.video-call {
+    width: 100%;
+    opacity: 0.3;
+}
+
+.subtitle {
+    text-align: center;
+    margin: 14% 10% 15% 5%;
+    font-size: 1.5rem;
+    position: absolute;
+    font-family: "Josefin Sans", sans-serif;
+    color: #465EFF;
+    z-index: 4;
+    font-weight: 600;
+    width: 40%;
+}
+
+.title {
+    font-family: "Josefin Sans", sans-serif;
+    color: #fcfc30;
+    background-color: #465EFF;
+    font-size: 60px;
+    padding: 0.5rem;
+    font-weight: 600;
+}
+
+.cam-section {
+    text-align: center;
+    color: #6C7077;
+    font-size: 22px;
+    font-family: "Arimo", sans-serif;
+    padding: 1rem;
+    background-color: #FFFFFF;
+}
+
+img.img-camera {
+    border-radius: 10px;
+    cursor: pointer;
+    width: 6%;
+    background-color: #e54141;
+    box-shadow: 5px 5px 5px #6f4646;
+}
+
+img.img-camera:hover {
+    background-color: #969292;
+}
+
+button.button-camera {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1.5rem;
+    background: none !important;
+    border: none !important;
+}
+
+
+.cam-content {
+    width: 100%;
+    background: white;
+}
+
+.footer {
+    height: 5px;
+}
