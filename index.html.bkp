@@ -1,95 +1,5 @@
 <!DOCTYPE html>
 
-<style type="text/css" media="screen">
-  body {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  .container {
-    width: 100%;
-    margin: 0 auto;
-    background-color: #fcfc30;
-  }
-
-  img.logo-bb {
-    width: 50%;
-    position: absolute;
-    opacity: 0.7;
-  }
-
-  .content {
-    width: 50%;
-    background: #c8cadc;
-  }
-
-  img.video-call {
-    width: 100%;
-    opacity: 0.3;
-  }
-
-  .subtitle {
-    text-align: center;
-    margin: 14% 10% 15% 5%;
-    font-size: 1.5rem;
-    position: absolute;
-    font-family: "Josefin Sans", sans-serif;
-    color: #465eff;
-    z-index: 4;
-    font-weight: 600;
-    width: 40%;
-  }
-
-  .title {
-    font-family: "Josefin Sans", sans-serif;
-    color: #fcfc30;
-    background-color: #465eff;
-    font-size: 60px;
-    padding: 0.5rem;
-    font-weight: 600;
-  }
-
-  .cam-section {
-    text-align: center;
-    color: #6c7077;
-    font-size: 22px;
-    font-family: "Arimo", sans-serif;
-    padding: 1rem;
-    background-color: #ffffff;
-  }
-
-  img.img-camera {
-    border-radius: 10px;
-    cursor: pointer;
-    width: 6%;
-    background-color: #e54141;
-    box-shadow: 5px 5px 5px #6f4646;
-  }
-
-  img.img-camera:hover {
-    background-color: #969292;
-  }
-
-  button.button-camera {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 1.5rem;
-    background: none !important;
-    border: none !important;
-  }
-
-  .cam-content {
-    width: 100%;
-    background: white;
-  }
-
-  .footer {
-    height: 5px;
-  }
-</style>
-
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Atendimento BB</title>
@@ -99,8 +9,7 @@
     var nicChatPOC = "dcff5278-b870-4308-ad34-7799be5418c0";
     var clusterNiC = "b32";
     var surflyWidgetKey = "7770e7d092434ab297abeb6224ffe070";
-    var videoSignalerURL =
-      "https://home-b32.nice-incontact.com/inContact/Manage/Scripts/Spawn.aspx?scriptName=Surfly_Signaler&bus_no=4606213&scriptId=197582619&skill_no=23098050&p1=&p2=&p3=&p4=&p5=&p6=&p7=&p8=&p9=&Guid=fd79aa52-e1c3-48d5-b73a-11659f12cda0";
+    var videoSignalerURL ="https://home-b32.nice-incontact.com/inContact/Manage/Scripts/Spawn.aspx?scriptName=Surfly_Signaler&bus_no=4606213&scriptId=197582619&skill_no=23098050&p1=&p2=&p3=&p4=&p5=&Guid=fd79aa52-e1c3-48d5-b73a-11659f12cda0";
     var surflyModalTitle = "Start Videochat";
     var surflyModalBody =
       "Thank you for requesting support through our secure co-browsing platform. The EPB representative assisting you today will not be able to see any open tabs in your browser or sensitive information such as passwords. Would you like to proceed with this session and connect with a local EPB representative?";
@@ -137,12 +46,6 @@
       };
     };
 
-    // Função para pegar o valor do parâmetro agentId da URL
-    function getAgentIdFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("id");
-    }
-
     function signalContact(contactId, followerLink, sessionPin, type) {
       var url = new URL(chatSignalerURL);
       url.searchParams.set("p1", contactId);
@@ -162,14 +65,11 @@
       fetch(url);
     }
 
-    //Start a workItem
+    //
     function signalWorkItem(followerLink) {
       var url = new URL(videoSignalerURL);
-      var agentId = getAgentIdFromURL(); // Recupera o agentId da URL
       url.searchParams.set("p1", "startWorkItem");
       url.searchParams.set("p2", followerLink);
-      url.searchParams.set("p5", "Teste de String para passagem no parametro!");
-      url.searchParams.set("p6", agentId); // Adiciona o agentId como p6
       fetch(url, { mode: "no-cors" });
     }
 
@@ -183,20 +83,15 @@
 
     // Create Videochat Session
     function createVideochatSession() {
-      console.log("Está entrando na função createVideochatSession")
-      Surfly.init();
       var videochatSession = Surfly.session({
         block_until_agent_joins: false,
         hide_unitl_anget_joins: true,
         videochat_autostart: true,
         start_with_fullscreen_videochat: true,
-        videochat_prompt: false,
+        videochat_prompt: true,
         start_muted: false,
       });
-      var surflyMetadata = {
-        name: "Cliente Teste",
-        email: "cliente@teste.com",
-      };
+      var surflyMetadata = { name: "Pedro Pereira", email: "pedro@surfly.com" };
 
       videochatSession
         .on("session_created", function (session, event) {
@@ -305,7 +200,7 @@
         agent_can_request_control: true,
         automated_session_recording_enabled: true,
         end_redirect_enabled: true,
-        leader_redirect_url: "https://a5-surfly.a5solutions.com/index.html",
+        leader_redirect_url: "https://www.espn.com",
       };
 
       Surfly.init(settings, function (initResult) {
@@ -336,45 +231,36 @@
 </head>
 
 <body class="pagecontainer">
-  <script>
-    window.addEventListener("load", function () {
-      setTimeout(() => {
-        // Sua função aqui
-        createVideochatSession()
-      }, 3000);
-    });
-  </script>
-  <!-- <link rel="stylesheet" href="css/style-surfly.css" />
+  <link rel="stylesheet" href="css/style-surfly.css" />
   <link
     href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
     rel="stylesheet"
-  /> -->
+  />
 
   <div class="container">
     <div class="first-section"><div class="title">Atendimento BB</div></div>
-    <div class="subtitle">Atendimento</div>
+    <div class="subtitle">Pra você / Atendimento</div>
     <div class="content">
       <img
-        src="https://i.imgur.com/schqIvj.jpeg"
+        src="images/CardImg-Voce-Atendimento-Digitalmente-min.jpg"
         alt="video-call"
         class="video-call"
       />
-      <img
-        src="https://i.imgur.com/ObsDnDF.png"
-        alt="logo-bb"
-        class="logo-bb"
-      />
+      <img src="images/logobb.png" alt="logo-bb" class="logo-bb" />
     </div>
-    <div class="cam-section">Aguarde que logo iniciaremos seu atendimento!</div>
-    <!-- <div class="cam-content">
+    <div class="cam-section">
+      Clique no botão abaixo e inicie uma chamada de vídeo com um de nossos
+      atendentes!
+    </div>
+    <div class="cam-content">
       <button onclick="{createVideochatSession()}" class="button-camera">
         <img
-          src="https://i.imgur.com/v2IxDzo.png"
+          src="images/video-img.png"
           alt="img-camera"
           class="img-camera"
         />
       </button>
-    </div> -->
+    </div>
     <div class="footer"></div>
   </div>
 </body>
